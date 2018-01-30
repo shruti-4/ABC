@@ -1,1 +1,11 @@
-ysgdfjkfe
+-- Function: hellofun(character varying, character varying)
+
+-- DROP FUNCTION hellofun(character varying, character varying);
+
+CREATE OR REPLACE FUNCTION "test".hellofun(usrname character varying, passwrd character varying)
+  RETURNS void AS
+$BODY$begin
+insert into demo(usrname,passwrd)Values(usrname,passwrd);
+end$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
