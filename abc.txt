@@ -9,3 +9,32 @@ insert into demo(usrname,passwrd)Values(usrname,passwrd);
 end$BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
+  -----------------------------------------------------------get data-----------------------------------------
+  
+  -- Function: test.getshrutidetails()
+
+-- DROP FUNCTION test.getshrutidetails();
+
+CREATE OR REPLACE FUNCTION test.getshrutidetails()
+  RETURNS SETOF refcursor AS
+$BODY$
+ 
+      DECLARE
+                        getlesion REFCURSOR := 'details';
+            BEGIN  
+           
+            OPEN getlesion FOR
+                        
+                        select * from "test".momtable;
+        
+            RETURN NEXT getlesion;
+            RETURN;    
+END;
+ 
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION test.getshrutidetails()
+  OWNER TO postgres;
+
